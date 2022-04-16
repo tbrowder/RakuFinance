@@ -1,0 +1,27 @@
+{
+  "auth": "zef:tbrowder",
+  "authors": [
+    "Tom Browder"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+    "Text::Utils"
+  ],
+  "description": "Provides routines to calculate the basis of a portfolio of investments",
+  "license": "Artistic-2.0",
+  "name": "RakuFinance",
+  "perl": "6.d",
+  "provides": {
+    "RakuFinance": "lib/RakuFinance.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+    "finance stocks securities savings 'mutual funds'"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
