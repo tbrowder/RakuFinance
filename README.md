@@ -19,6 +19,8 @@ DESCRIPTION
 
 The user has to provide the accepted symbols for his or her securities as well as their buy/sell data in a comma-separated-value file with the appropriate header line (see **Input Files**) along with pertinent historical data available from public data sources (see **Data Sources**).
 
+Note the module is currently designed for the US but should be able to be modified to handle currency and securities for any country with the help of an interested collaborator. Contact the author if you are volunteering.
+
 Tranactions
 -----------
 
@@ -48,10 +50,45 @@ The following table shows a hypothetical, abbreviated set of transactions for se
 </tbody>
 </table>
 
-Environment variables
+Environment Variables
 ---------------------
 
 The working directory chosen by the user should be a dedicated directory with several subdirectories to hold public data of various types. The user's personal data of buys, holdings, and sales should be segregated into another directory outside of the working directory. The absolute path of that directory should be defined in environment variable **RAKUFINANCE_USER_DATA**.
+
+Input Files
+-----------
+
+Input files can be read from the following financial financial firms:
+
+  * TD Ameritrade
+
+  * Fidelity
+
+Data Sources
+------------
+
+Environment Variables
+---------------------
+
+User Program
+------------
+
+An executable Raku program, **finance**, is installed as part of this module. It provides modes for calculating the following statistics for a portfolio:
+
+  * 1 - create a csv file showing all transactions by date, symbol, transaction order (for a single security or all);
+
+  * 2 - create a csv file showing time-series data for a security 
+
+  * 3 - create a csv file showing basis for 
+
+  * 4 - create a csv file showing current value, gain/loss, basis, and return on investment (for a single security or all)
+
+Planned Features
+----------------
+
+  * Live updates via one of several possible free or paid sources
+
+  * Interface with an SQLite database file in GnuCash format (see [https://gnucash.org](https://gnucash.org))
 
 AUTHOR
 ======

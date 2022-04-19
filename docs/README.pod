@@ -21,6 +21,10 @@ The user has to provide the accepted symbols for his or her securities as well a
 data in a comma-separated-value file with the appropriate header line (see B<Input Files>)
 along with pertinent historical data available from public data sources (see B<Data Sources>).
 
+Note the module is currently designed for the US but should be able to be modified to handle
+currency and securities for any country with the help of an interested collaborator. Contact
+the author if you are volunteering.
+
 =head2 Tranactions
 
 Transactions recognized by this module currently are:
@@ -57,7 +61,7 @@ XXX      | 2022-01-01 | c     | 4
 XXX      | 2022-01-01 | b     | 5
 =end table
 
-=head2 Environment variables
+=head2 Environment Variables
 
 The working directory chosen by the user should be a dedicated directory
 with several subdirectories to hold public data of various types. The
@@ -66,7 +70,31 @@ segregated into another directory outside of the working
 directory. The absolute path of that directory should 
 be defined in environment variable B<RAKUFINANCE_USER_DATA>.
 
+=head2 Input Files
 
+Input files can be read from the following financial financial firms:
+
+=item TD Ameritrade
+=item Fidelity
+
+=head2 Data Sources
+
+=head2 Environment Variables
+
+=head2 User Program
+
+An executable Raku program, B<finance>, is installed as part of this module. It provides
+modes for calculating the following statistics for a portfolio:
+
+=item 1 - create a csv file showing all transactions by date, symbol, transaction order (for a single security or all);
+=item 2 - create a csv file showing time-series data for a security 
+=item 3 - create a csv file showing basis for 
+=item 4 - create a csv file showing current value, gain/loss, basis, and return on investment (for a single security or all)
+
+=head2 Planned Features
+
+=item Live updates via one of several possible free or paid sources
+=item Interface with an SQLite database file in GnuCash format (see L<https://gnucash.org>)
 
 =head1 AUTHOR
 
