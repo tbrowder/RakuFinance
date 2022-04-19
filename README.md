@@ -24,7 +24,14 @@ Tranactions
 
 Transactions recognized by this module currently are:
 
-Type | Code --- | --- Buy | b Sale | sa Split | sp Merger | m Dividend | d Capital gain | c 
+<table class="pod-table">
+<thead><tr>
+<th>Type</th> <th>Code</th>
+</tr></thead>
+<tbody>
+<tr> <td>Buy</td> <td>b</td> </tr> <tr> <td>Sale</td> <td>sa</td> </tr> <tr> <td>Split</td> <td>sp</td> </tr> <tr> <td>Merger</td> <td>m</td> </tr> <tr> <td>Dividend</td> <td>d</td> </tr> <tr> <td>Capital gain</td> <td>c</td> </tr>
+</tbody>
+</table>
 
 Note transaction codes may be entered in lower- or upper-case.
 
@@ -32,7 +39,14 @@ In addition to the transaction type, each transaction for a security on the same
 
 The following table shows a hypothetical, abbreviated set of transactions for security XXX (number of shares, prices, and other transacion datate are not shown).
 
-Security | Date | Trans | Trans | | Code | Order --- | --- | --- | --- XXX | 2022-01-01 | b | 1 XXX | 2022-01-01 | d | 2 XXX | 2022-01-01 | sp | 3 XXX | 2022-01-01 | c | 4 XXX | 2022-01-01 | b | 5
+<table class="pod-table">
+<thead><tr>
+<th>Security</th> <th>Date</th> <th>Trans Code</th> <th>Trans Order</th>
+</tr></thead>
+<tbody>
+<tr> <td>XXX</td> <td>2022-01-01</td> <td>b</td> <td>1</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>d</td> <td>2</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>sp</td> <td>3</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>c</td> <td>4</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>b</td> <td>5</td> </tr>
+</tbody>
+</table>
 
 Environment variables
 ---------------------
