@@ -15,9 +15,9 @@ use RakuFinance;
 DESCRIPTION
 ===========
 
-RakuFinance is a module one can use to calculate various data for a portfolio of investments including basis, gain/loss, current value, and time-series statistics.
+**RakuFinance** is a module one can use to calculate various data for a portfolio of investments including basis, gain/loss, current value, and time-series statistics.
 
-The user has to provide the accepted symbols for his or her securities as well as their buy/sell data in a comma-separated-value file with the appropriate header line (see **Input Files**) and historical data available from public data sources.
+The user has to provide the accepted symbols for his or her securities as well as their buy/sell data in a comma-separated-value file with the appropriate header line (see **Input Files**) along with pertinent historical data available from public data sources (see **Data Sources**).
 
 Tranactions
 -----------
