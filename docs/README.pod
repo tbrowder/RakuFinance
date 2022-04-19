@@ -2,6 +2,8 @@
 
 =head1 NAME
 
+B<THIS IS A WORK-IN-PROGRESS NOT YET RELEASED>
+
 B<RakuFinance> - Show basis, gain/loss, current value, and other data for a portfolio of investments
 
 =head1 SYNOPSIS
