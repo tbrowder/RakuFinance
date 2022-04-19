@@ -3,6 +3,8 @@
 NAME
 ====
 
+**THIS IS A WORK-IN-PROGRESS NOT YET RELEASED**
+
 **RakuFinance** - Show basis, gain/loss, current value, and other data for a portfolio of investments
 
 SYNOPSIS
