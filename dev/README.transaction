@@ -1,0 +1,11 @@
+Assumptions:
+
++ either none or only one of buy or sale per day
++ either none or an entry each of split, gain-per-share, and div-per-share
++ if none of the five events exist on a date, then there is no transaction for that date
+
+Fatal errors upon reading an event data file::
+
++ multiple instances of an event type on the same date
++ both a buy and a sale on the same date
+

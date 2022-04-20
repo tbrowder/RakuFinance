@@ -1,0 +1,48 @@
+From Yahoo finance:
+==================
+
+What is the "adjusted close?"
+
+Adjusted close is the closing price after adjustments
+for all applicable split and dividend distributions.
+Data are adjusted using appropriate split and dividend
+multipliers, adhering to the Center for Research in
+Security Prices (CRSP) standards.
+
+Split multipliers are determined by the split ratio
+
+For example:
+
++ in a 2 for 1 split (2:1) the pre-split data are multiplied
+  by 0.5 (1/2)
+
++ in a 4 for 1 split (4:1) the pre-split data are multiplied
+  by 0.5 (1/4)
+
++ in a 1 for 5 reverse split (1:5) the pre-split data are multiplied
+  by 5 (5/1)
+
+Dividend multipliers are calculated based on dividend
+as a ratio as a percentage of the price,
+primarily to avoid negative hstorical pricing.
+
+For example:
+
++ If a $0.08 cash dividend is distributed on Feb 19
+  (ex. date) and the Feb 18 closing price is $24.96, the
+  pre-dividend data are multiplied by (1-0.08/24.96) = 0.9968.
+
++ If a $2.40 cash dividend is distributed on May 12
+  (ex. date) and the May 11 closing price is $16.51, the
+  pre-dividend data are multiplied by (1-2.40/16.51) = 0.08546.
+
++ If a $1.25 cash dividend is distributed on Jan 25
+  (ex. date) and the Jan 24 closing price is $52.20, the
+  pre-dividend data are multiplied by (1-1.25/52.20) = 0.9756.
+
+Rebuttal:
+========
+
+But the historical data are somehow normalized so what
+is the magic to unpack it?
+

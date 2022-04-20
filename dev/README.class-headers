@@ -1,0 +1,62 @@
+The desired Transaction class header and corresponding attr names:
+-----------------------------------------------------------------
+
+Date,Symbol,Event,PrevTotSh,PrevTotCost,Split,  GainPerSh,DivPerSh,TotSh,TotCost
+Date Symbol evt*  prevtotsh prevtotcost splitr* gainps    divps    totsh totcost
+
+    *Note: evt is a string output by the triggering event object.Name for the transaction output line
+    *Note: splitr is the ratio determined by decoding the Split object's value
+
+object attributes:
+    # set by a setter method
+    has Split    $.split;
+    has Dividend $.divps;
+    has CapGain  $.gainps;
+    has Buy      $.buy;
+    has Sale     $.sale;
+other attributes:
+    has $.prevtotsh   is rw = 0;
+    has $.prevtotcost is rw = 0;
+    has $.splitr      is rw = 0;
+    has $.gainps      is rw = 0;
+    has $.divps       is rw = 0;
+    has $.totsh       is rw = 0;
+    has $.totcost     is rw = 0;
+
+Keys for in/out file names for data:
+-----------------------------------
+   daily => "$Symbol-daily.csv",
+   split => "$Symbol-splits.csv",
+   div   => "$Symbol-dividends.csv",
+   gain  => "$Symbol-cap-gains.csv",
+   buy   => "$Symbol-buys.csv",
+   sale  => "$Symbol-sales.csv",
+   note  => "$Symbol-notes.csv",
+   trans => "$Symbol-transactions.csv", 
+
+Same data for other classes:
+---------------------------
+
+class Sale does Trade is export {
+# headers: Date,Shares,Proceeds
+           Date Shares Proceeds
+
+
+class Buy does Trade is export {
+# headers: Date,Shares,TotalCost
+           Date Shares TotalCost
+
+class Quote is Data is export {
+# headers: Date,Open,High,Low,Close,Adj Close,Volume
+           Date Open High Low Close Adj-Close Volume
+
+class Split is Data is export {
+# headers: Date,Stock Splits
+           Date Split
+
+class Dividend is Data is export {
+# headers: Date,Dividends
+           Date Dividend
+
+
+

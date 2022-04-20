@@ -1,0 +1,23 @@
++ refactor subs in using program into the module
++ BUG cannot handle input files with empty fields at the end of a line
++ create a public module
++ Note: ensure reading is ok (empty field with no note but trailing comma)
++ modify to use a Raku DateTime object for future non-fund (e.g., stocks)
++ make other mods as necessary to handle multiple transactions in a single day
++ add a Transaction output file reader 
++ add an option to adjust output formatting to fit the actual max field length
+  in the input data
++ ensure negative values are handled in output formats
++ add formula from Yahoo Finance for using 'Close' and 'Adj Close' to 
+  determine the previous price
+  BUT I need to find out how it's normalized!!
++ handle ex-dividend dates
++ handle mergers
++ group and sort events by: symbol, date, event type (SP,SA,B,D,G,M,SD,R) (sd-stock div, r-renvest)
++ create an enum for event codes
++ add testing for TD and other sources providing official financial data
+
+
+
+
+
