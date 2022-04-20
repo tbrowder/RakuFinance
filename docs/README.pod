@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-B<THIS IS A WORK-IN-PROGRESS NOT YET RELEASED>
+B<THIS IS A WORK-IN-PROGRESS: NOT YET RELEASED>
 
 B<RakuFinance> - Show basis, gain/loss, current value, and other data for a portfolio of investments
 
@@ -20,7 +20,7 @@ B<RakuFinance> is a module one can use to calculate various data for a portfolio
 including basis, gain/loss, current value, and time-series statistics.
 
 The user has to provide the accepted symbols for his or her securities as well as their buy/sell
-data in a comma-separated-value file with the appropriate header line (see B<Input Files>)
+data in a comma-separated-value (CSV) file with the appropriate header line (see B<Input Files>)
 along with pertinent historical data available from public data sources (see B<Data Sources>).
 
 Note the module is currently designed for the US but should be able to be modified to handle
@@ -49,7 +49,7 @@ on the same date has a temporal number to distinguish its order
 of execution regardless of type.
 
 The following table shows a hypothetical, abbreviated set of transactions
-for security XXX (number of shares, prices, and other transacion datate
+for security XXX (number of shares, prices, and other transaction data
 are not shown).
 
 =begin table
@@ -70,7 +70,8 @@ with several subdirectories to hold public data of various types. The
 user's personal data of buys, holdings, and sales should be
 segregated into another directory outside of the working 
 directory. The absolute path of that directory should 
-be defined in environment variable B<RAKUFINANCE_USER_DATA>.
+be defined in one of the environment variables B<RAKU_FINANCE_USER_DATA_DIRECTORY>
+[the default] or B<RAKU_FINANCE_USER_DATA_FOLDER>.
 
 =head2 Input Files
 
@@ -88,15 +89,16 @@ Input files can be read from the following financial financial firms:
 An executable Raku program, B<finance>, is installed as part of this module. It provides
 modes for calculating the following statistics for a portfolio:
 
-=item 1 - create a csv file showing all transactions by date, symbol, transaction order (for a single security or all);
-=item 2 - create a csv file showing time-series data for a security 
-=item 3 - create a csv file showing basis for 
-=item 4 - create a csv file showing current value, gain/loss, basis, and return on investment (for a single security or all)
+=item 1 - create a CSV file showing all transactions by date, symbol, transaction order (for a single security or all);
+=item 3 - create a CSV file showing basis for 
+=item 4 - create a CSV file showing current value, gain/loss, basis, and return on investment (for a single security or all)
 
 =head2 Planned Features
 
 =item Live updates via one of several possible free or paid sources
 =item Interface with an SQLite database file in GnuCash format (see L<https://gnucash.org>)
+=item Accept inputs via a JSON file
+=item Output files in JSON format
 
 =head1 AUTHOR
 

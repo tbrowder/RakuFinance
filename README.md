@@ -3,7 +3,7 @@
 NAME
 ====
 
-**THIS IS A WORK-IN-PROGRESS NOT YET RELEASED**
+**THIS IS A WORK-IN-PROGRESS: NOT YET RELEASED**
 
 **RakuFinance** - Show basis, gain/loss, current value, and other data for a portfolio of investments
 
@@ -19,7 +19,7 @@ DESCRIPTION
 
 **RakuFinance** is a module one can use to calculate various data for a portfolio of investments including basis, gain/loss, current value, and time-series statistics.
 
-The user has to provide the accepted symbols for his or her securities as well as their buy/sell data in a comma-separated-value file with the appropriate header line (see **Input Files**) along with pertinent historical data available from public data sources (see **Data Sources**).
+The user has to provide the accepted symbols for his or her securities as well as their buy/sell data in a comma-separated-value (CSV) file with the appropriate header line (see **Input Files**) along with pertinent historical data available from public data sources (see **Data Sources**).
 
 Note the module is currently designed for the US but should be able to be modified to handle currency and securities for any country with the help of an interested collaborator. Contact the author if you are volunteering.
 
@@ -41,7 +41,7 @@ Note transaction codes may be entered in lower- or upper-case.
 
 In addition to the transaction type, each transaction for a security on the same date has a temporal number to distinguish its order of execution regardless of type.
 
-The following table shows a hypothetical, abbreviated set of transactions for security XXX (number of shares, prices, and other transacion datate are not shown).
+The following table shows a hypothetical, abbreviated set of transactions for security XXX (number of shares, prices, and other transaction data are not shown).
 
 <table class="pod-table">
 <thead><tr>
@@ -55,7 +55,7 @@ The following table shows a hypothetical, abbreviated set of transactions for se
 Environment Variables
 ---------------------
 
-The working directory chosen by the user should be a dedicated directory with several subdirectories to hold public data of various types. The user's personal data of buys, holdings, and sales should be segregated into another directory outside of the working directory. The absolute path of that directory should be defined in environment variable **RAKUFINANCE_USER_DATA**.
+The working directory chosen by the user should be a dedicated directory with several subdirectories to hold public data of various types. The user's personal data of buys, holdings, and sales should be segregated into another directory outside of the working directory. The absolute path of that directory should be defined in one of the environment variables **RAKU_FINANCE_USER_DATA_DIRECTORY** [the default] or **RAKU_FINANCE_USER_DATA_FOLDER**.
 
 Input Files
 -----------
@@ -77,13 +77,11 @@ User Program
 
 An executable Raku program, **finance**, is installed as part of this module. It provides modes for calculating the following statistics for a portfolio:
 
-  * 1 - create a csv file showing all transactions by date, symbol, transaction order (for a single security or all);
+  * 1 - create a CSV file showing all transactions by date, symbol, transaction order (for a single security or all);
 
-  * 2 - create a csv file showing time-series data for a security 
+  * 3 - create a CSV file showing basis for 
 
-  * 3 - create a csv file showing basis for 
-
-  * 4 - create a csv file showing current value, gain/loss, basis, and return on investment (for a single security or all)
+  * 4 - create a CSV file showing current value, gain/loss, basis, and return on investment (for a single security or all)
 
 Planned Features
 ----------------
@@ -91,6 +89,10 @@ Planned Features
   * Live updates via one of several possible free or paid sources
 
   * Interface with an SQLite database file in GnuCash format (see [https://gnucash.org](https://gnucash.org))
+
+  * Accept inputs via a JSON file
+
+  * Output files in JSON format
 
 AUTHOR
 ======
