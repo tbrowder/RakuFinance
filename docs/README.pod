@@ -27,7 +27,7 @@ Note the module is currently designed for the US but should be able to be modifi
 currency and securities for any country with the help of an interested collaborator. Contact
 the author if you are volunteering.
 
-=head2 Tranactions
+=head2 Transactions
 
 Transactions recognized by this module currently are:
 
@@ -68,10 +68,10 @@ XXX      | 2022-01-01 | b     | 5
 The working directory chosen by the user should be a dedicated directory
 with several subdirectories to hold public data of various types. The
 user's personal data of buys, holdings, and sales should be
-segregated into another directory outside of the working 
-directory. The absolute path of that directory should 
-be defined in one of the environment variables B<RAKU_FINANCE_USER_DATA_DIRECTORY>
-[the default] or B<RAKU_FINANCE_USER_DATA_FOLDER>.
+segregated into another directory B<outside of the working 
+directory>. The absolute path of that directory should 
+be defined in one of the environment variables B<RakuFinanceUserDataDirectory>
+[the default] or B<RakuFinanceUserDataFolder>.
 
 =head2 Input Files
 
@@ -79,6 +79,9 @@ Input files can be read from the following financial financial firms:
 
 =item TD Ameritrade
 =item Fidelity
+
+Other data formats may be added in the future. Interested users should file
+an issue if they are willing to help.
 
 =head2 Data Sources
 
@@ -99,6 +102,37 @@ modes for calculating the following statistics for a portfolio:
 =item Interface with an SQLite database file in GnuCash format (see L<https://gnucash.org>)
 =item Accept inputs via a JSON file
 =item Output files in JSON format
+
+=head2 User's Configuration File
+
+The B<finance> program requires the user to define his or her commodities
+by listing their symbols  
+in a confguration file named B<config.ini> located in the working directory.
+The file uses a custom INI-style format with comments begining with a '#'
+character, two keywords ('hold' and 'reinvest') that are followed by a
+space-separated list of symbols.  Following is a simple example:
+
+=begin code
+# A list of stocks or mutual funds which 
+# ARE NOT reinvested with dividends and capital gains: 
+hold:
+    T
+mrk # commodity symbols are not case-sensitive
+
+# A list of stocks or mutual funds which 
+# ARE reinvested with dividends and capital gains: 
+reinvest:
+
+=end code
+
+You may use B<finance> to write an empty configuration file by using the 'config' mode
+which either checks an existing configuration file or creates an empty one with the
+required types of lists.
+
+=head1 CREDITS
+
+The author is indebted to the developers of GnuCash (see L<https://gnucash.org>) for
+their account schema for commodities.
 
 =head1 AUTHOR
 

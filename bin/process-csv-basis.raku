@@ -1,5 +1,6 @@
 #!/usr/bin/env raku
 
+use TOML:Thumb;
 use Data::Dump::Tree;
 use lib "./lib";
 use YahooMutualFunds;
