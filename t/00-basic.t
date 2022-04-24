@@ -1,8 +1,9 @@
 use Test;
 
 use RakuFinance;
-
-# test the config.ini subs
+use YahooFinance;
+use SEC-EDGAR;
+use GnuCash;
 
 pass "replace me";
 
