@@ -14,7 +14,9 @@
   "name": "RakuFinance",
   "perl": "6.d",
   "provides": {
+    "GnuCash": "lib/GnuCash.rakumod",
     "RakuFinance": "lib/RakuFinance.rakumod",
+    "SEC-EDGAR": "lib/SEC-EDGAR.rakumod",
     "YahooFinance": "lib/YahooFinance.rakumod"
   },
   "resources": [
