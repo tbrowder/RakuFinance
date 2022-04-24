@@ -14,7 +14,8 @@
   "name": "RakuFinance",
   "perl": "6.d",
   "provides": {
-    "RakuFinance": "lib/RakuFinance.rakumod"
+    "RakuFinance": "lib/RakuFinance.rakumod",
+    "YahooFinance": "lib/YahooFinance.rakumod"
   },
   "resources": [
   ],

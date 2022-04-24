@@ -1,7 +1,7 @@
 use Test;
 use RakuFinance;
-use YahooFinance;
 
 pass "replace me";
 
 done-testing;
+

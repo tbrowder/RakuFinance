@@ -53,25 +53,35 @@ for security XXX (number of shares, prices, and other transaction data
 are not shown).
 
 =begin table
-Security | Date       | Trans | Trans
-         |            | Code  | Order
----      + ---        + ---   + ---
-XXX      | 2022-01-01 | b     | 1
-XXX      | 2022-01-01 | d     | 2
-XXX      | 2022-01-01 | sp    | 3
-XXX      | 2022-01-01 | c     | 4
-XXX      | 2022-01-01 | b     | 5
+Security | Date       | Transaction | Transaction
+         |            | Code        | Order
+---      + ---        + ---         + ---
+XXX      | 2022-01-01 | b           | 1
+XXX      | 2022-01-01 | d           | 2
+XXX      | 2022-01-01 | sp          | 3
+XXX      | 2022-01-01 | c           | 4
+XXX      | 2022-01-01 | b           | 5
 =end table
 
 =head2 Environment Variables
 
 The working directory chosen by the user should be a dedicated directory
-with several subdirectories to hold public data of various types. The
-user's personal data of buys, holdings, and sales should be
+with several subdirectories to hold public data of various types. 
+
+=head3 B<RakFinPrivDataDir>
+
+The user's personal data of buys, holdings, and sales should be
 segregated into another directory B<outside of the working 
-directory>. The absolute path of that directory should 
-be defined in one of the environment variables B<RakuFinanceUserDataDirectory>
-[the default] or B<RakuFinanceUserDataFolder>.
+directory>. The absolute path of that directory must 
+be defined in the environment variable B<RakFinPrivDataDir>.
+If it is not defined or found to be invalid, the program will so advise and abort.
+
+=head3 B<RakFinPubDataDir>
+
+Publicly available data is expected to be in local directory 'public-data'
+or in the directory defined by environment variable B<RakFinPubDataDir>. 
+If it is not defined or found to be invalid, the program will so advise and abort.
+
 
 =head2 Input Files
 
@@ -100,6 +110,7 @@ modes for calculating the following statistics for a portfolio:
 
 =item Live updates via one of several possible free or paid sources
 =item Interface with an SQLite database file in GnuCash format (see L<https://gnucash.org>)
+=item Interface with the publicly available EDGAR data from the US Securuties and Exchange Commission (SEC)
 =item Accept inputs via a JSON file
 =item Output files in JSON format
 
@@ -117,12 +128,12 @@ space-separated list of symbols.  Following is a simple example:
 # ARE NOT reinvested with dividends and capital gains: 
 hold:
     T
-mrk # commodity symbols are not case-sensitive
+    mrk # commodity symbols are not case-sensitive
 
 # A list of stocks or mutual funds which 
 # ARE reinvested with dividends and capital gains: 
 reinvest:
-
+ARTIX TAREX JSVAX SLASX
 =end code
 
 You may use B<finance> to write an empty configuration file by using the 'config' mode

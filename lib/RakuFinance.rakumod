@@ -1,32 +1,70 @@
 unit module RakuFinance;
 
+use Text::Utils :strip-comment;
 
-=begin pod
+sub read-config($cfil, :$debug --> Hash) is export {
+    my %h;
+    my @lines = $cfil.IO.lines;
+    LINE: for @lines -> $line is copy {
+        $line = strip-comment $line;
+        next if $line !~~ /\S/;
 
-=head1 NAME
+        # Symbols are letters or numbers and may have periods for suffixes.
+        # All are assumed to have dividends and capital gains reinvested
+        # since purchase unless there is a stop date as the second word
+        # on the same line as the symbol.
+        # The second should be the date (YYYY-MM-DD) when
+        # the security stopped having dividends reinvested.
 
-B<RakuFinance> - Provides routines to calculate the basis of a portfolio of investments
+        my @w = $line.uc.words;
+        my $sym = @w.shift;
+        my $dat = @w.elems ?? @w.shift !! 0; 
+        %h{$sym} = $dat;
+    }
 
-=head1 SYNOPSIS
+    if $debug {
+        note "DEBUG: dumping config file '$cfil':";
+        dump-config  %h;
+    }
 
-=begin code :lang<raku>
+    %h
+} # sub read-config
 
-use RakuFinance;
+sub dump-config(%h) is export {
+    for %h.keys.sort -> $k {
+        print "  $k";
+        my $date = %h{$k};
+        if $date {
+            say " (reinvestment stop date: $date)";
+        }
+        else {
+            say " (all dividends and cap gains are reinvested)";
+        }
+    }
+} # sub dump-config
 
-=end code
+sub check-config($cfil, :$debug) is export {
+    if $cfil.IO.r {
+        say "Checking existing file '$cfil'...";
+        my %config = read-config $cfil, :$debug;
+        say "Dumping $cfil:";
+        dump-config %config;
+        say "Exiting."; exit;
+    }
+    else {
+        say "Creating empty configuration file '$cfil'...";
+        my $fh = open $cfil, :w;
 
-=head1 DESCRIPTION
-
-RakuFinance is a module one can use to to calculate the basis of a portfolio of investments.
-
-=head1 AUTHOR
-
-Tom Browder <tbrowder@acm.org>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2022 Tom Browder
-
-This library is free software; you may redistribute it or modify it under the Artistic License 2.0.
-
-=end pod
+        $fh.print: qq:to/HERE/;
+        # Your list of securities of interest are entered here,
+        # one per line.  All are assumed to have dividends and 
+        # capital gains reinvested since purchase unless there 
+        # is a stop date as the second word on the same line as 
+        # the symbol. The second word should be the date (in
+        # format YYYY-MM-DD) when the security stopped having 
+        # dividends reinvested.
+        HERE
+        $fh.close;
+        say "Exiting."; exit;
+    }
+} # sub check-config

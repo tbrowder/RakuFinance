@@ -1,8 +1,9 @@
 #!/usr/bin/env raku
 
-use TOML:Thumb;
 use Data::Dump::Tree;
-use lib "./lib";
+
+use lib <../lib ./lib>;
+use RakuFinance;
 use YahooMutualFunds;
 
 my %syms = set <ARTIX TAREX JSVAX SLASX>;
@@ -61,17 +62,17 @@ for @*ARGS {
 # holding data from Yahoo Finance
 # as well as the user's buy/sell inputs
 # %h{$Symbol}{$Date} = <object>
-our %daily;  # object = Quote
-our %splits; # object = Split
-our %divs;   # object = Dividend
-our %gains;  # object = Gain
-our %buys;   # object = Buy
-our %sales;  # object = Sale
-#our %sdivs;  # object = StockDividend
-#our %merges, # object = Merger
-our %trans;  # object = Transaction
+my %daily;  # object = Quote
+my %splits; # object = Split
+my %divs;   # object = Dividend
+my %gains;  # object = Gain
+my %buys;   # object = Buy
+my %sales;  # object = Sale
+#my %sdivs;  # object = StockDividend
+#my %merges, # object = Merger
+my %trans;  # object = Transaction
 # group them in a giant hash
-our %coll = [
+my %coll = [
     daily  => %daily,
     split  => %splits,
     divs   => %divs,
@@ -82,8 +83,6 @@ our %coll = [
     #merge  => %merges,
     #sdivs  => %sdivs;
 ];
-
-
 
 # read data
 my @syms = @tgt-syms.sort;

@@ -1,6 +1,7 @@
 #!/usr/bin/env raku
 
-use Text::Utils :strip-comment;
+use lib <../lib ./lib>;
+use RakuFinance;
 
 constant $cfil = 'config.ini';
 
@@ -25,83 +26,3 @@ for @*ARGS {
         say "FATAL: Arg '$_' not recognized."; exit;
     }
 }
-
-
-sub read-config($cfil, :$debug --> Hash) is export {
-    my %h;
-    my $key;
-    my @lines = $cfil.IO.lines;
-    LINE: for @lines -> $line is copy {
-        $line = strip-comment $line;
-        next if $line !~~ /\S/;
-        # very strict set of only two keys: reinvest OR hold
-        if $line ~~ /^:i \s* (reinvest|hold) ':'? \s* $/ {
-            $key = ~$0.lc;
-            next LINE;
-        }
-        # symbols are letters or numbers 
-        # may have multiple symbols on a line
-        # may have them separated by spaces, semicolons, pipes, commas, or any combination thereof 
-        $line ~~ s:g/','/ /;
-        $line ~~ s:g/';'/ /;
-        $line ~~ s:g/'|'/ /;
-        my @w = $line.uc.words;
-        for @w -> $w {
-            %h{$key}{$w} = 1;
-        }
-    }
-    if $debug {
-        note "DEBUG: dumping config file '$cfil':";
-        dump-config  %h;
-    }
-    %h
-}
-
-sub dump-config(%h) is export {
-    for %h.keys.sort -> $k {
-        note "  $k:";
-        for %(%h{$k}).keys.sort -> $k2 {
-            note "      $k2";
-        }
-    }
-}
-
-sub check-config($cfil, :$debug) is export {
-    if $cfil.IO.r {
-        say "Checking existing file '$cfil'...";
-        my %config = read-config $cfil, :$debug;
-        say "Dumping $cfil:";
-        dump-config %config;
-        say "Exiting."; exit;
-    }
-    else {
-        say "Creating empty configuration file '$cfil'...";
-        my $fh = open $cfil, :w;
-
-        $fh.print: qq:to/HERE/;
-        # A list of stocks or mutual funds which 
-        # ARE NOT reinvested with dividends and capital gains: 
-        [hold]
-
-        # A list of stocks or mutual funds which 
-        # ARE reinvested with dividends and capital gains: 
-        [reinvest]
-
-        HERE
-        $fh.close;
-        say "Exiting."; exit;
-    }
-}
-
-=finish
-
-# A list of stocks or mutual funds which 
-# ARE NOT reinvested with dividends and capital gains: 
-hold = [
-T
-mrk # commodity symbols are not case-sensitive
-]
-# A list of stocks or mutual funds which 
-# ARE reinvested with dividends and capital gains: 
-reinvest = [
-]

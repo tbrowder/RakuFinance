@@ -23,8 +23,8 @@ The user has to provide the accepted symbols for his or her securities as well a
 
 Note the module is currently designed for the US but should be able to be modified to handle currency and securities for any country with the help of an interested collaborator. Contact the author if you are volunteering.
 
-Tranactions
------------
+Transactions
+------------
 
 Transactions recognized by this module currently are:
 
@@ -45,7 +45,7 @@ The following table shows a hypothetical, abbreviated set of transactions for se
 
 <table class="pod-table">
 <thead><tr>
-<th>Security</th> <th>Date</th> <th>Trans Code</th> <th>Trans Order</th>
+<th>Security</th> <th>Date</th> <th>Transaction Code</th> <th>Transaction Order</th>
 </tr></thead>
 <tbody>
 <tr> <td>XXX</td> <td>2022-01-01</td> <td>b</td> <td>1</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>d</td> <td>2</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>sp</td> <td>3</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>c</td> <td>4</td> </tr> <tr> <td>XXX</td> <td>2022-01-01</td> <td>b</td> <td>5</td> </tr>
@@ -55,7 +55,15 @@ The following table shows a hypothetical, abbreviated set of transactions for se
 Environment Variables
 ---------------------
 
-The working directory chosen by the user should be a dedicated directory with several subdirectories to hold public data of various types. The user's personal data of buys, holdings, and sales should be segregated into another directory outside of the working directory. The absolute path of that directory should be defined in one of the environment variables **RAKU_FINANCE_USER_DATA_DIRECTORY** [the default] or **RAKU_FINANCE_USER_DATA_FOLDER**.
+The working directory chosen by the user should be a dedicated directory with several subdirectories to hold public data of various types. 
+
+### **RakFinPrivDataDir**
+
+The user's personal data of buys, holdings, and sales should be segregated into another directory **outside of the working directory**. The absolute path of that directory must be defined in the environment variable **RakFinPrivDataDir**. If it is not defined or found to be invalid, the program will so advise and abort.
+
+### **RakFinPubDataDir**
+
+Publicly available data is expected to be in local directory 'public-data' or in the directory defined by environment variable **RakFinPubDataDir**. If it is not defined or found to be invalid, the program will so advise and abort.
 
 Input Files
 -----------
@@ -65,6 +73,8 @@ Input files can be read from the following financial financial firms:
   * TD Ameritrade
 
   * Fidelity
+
+Other data formats may be added in the future. Interested users should file an issue if they are willing to help.
 
 Data Sources
 ------------
@@ -90,9 +100,34 @@ Planned Features
 
   * Interface with an SQLite database file in GnuCash format (see [https://gnucash.org](https://gnucash.org))
 
+  * Interface with the publicly available EDGAR data from the US Securuties and Exchange Commission (SEC)
+
   * Accept inputs via a JSON file
 
   * Output files in JSON format
+
+User's Configuration File
+-------------------------
+
+The **finance** program requires the user to define his or her commodities by listing their symbols in a confguration file named **config.ini** located in the working directory. The file uses a custom INI-style format with comments begining with a '#' character, two keywords ('hold' and 'reinvest') that are followed by a space-separated list of symbols. Following is a simple example:
+
+    # A list of stocks or mutual funds which 
+    # ARE NOT reinvested with dividends and capital gains: 
+    hold:
+        T
+        mrk # commodity symbols are not case-sensitive
+
+    # A list of stocks or mutual funds which 
+    # ARE reinvested with dividends and capital gains: 
+    reinvest:
+    ARTIX TAREX JSVAX SLASX
+
+You may use **finance** to write an empty configuration file by using the 'config' mode which either checks an existing configuration file or creates an empty one with the required types of lists.
+
+CREDITS
+=======
+
+The author is indebted to the developers of GnuCash (see [https://gnucash.org](https://gnucash.org)) for their account schema for commodities.
 
 AUTHOR
 ======
