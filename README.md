@@ -68,19 +68,16 @@ Publicly available data is expected to be in local directory 'public-data' or in
 Input Files
 -----------
 
-Input files can be read from the following financial financial firms:
+Currently, input files can be read from the following financial financial firms:
 
-  * TD Ameritrade
+  * TD Ameritrade ([https://tdameritrade.com](https://tdameritrade.com))
 
-  * Fidelity
+  * Fidelity ([https://fidelity.com](https://fidelity.com))
 
 Other data formats may be added in the future. Interested users should file an issue if they are willing to help.
 
 Data Sources
 ------------
-
-Environment Variables
----------------------
 
 User Program
 ------------

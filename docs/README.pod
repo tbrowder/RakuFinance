@@ -85,17 +85,15 @@ If it is not defined or found to be invalid, the program will so advise and abor
 
 =head2 Input Files
 
-Input files can be read from the following financial financial firms:
+Currently, input files can be read from the following financial financial firms:
 
-=item TD Ameritrade
-=item Fidelity
+=item TD Ameritrade (L<https://tdameritrade.com>)
+=item Fidelity (L<https://fidelity.com>)
 
 Other data formats may be added in the future. Interested users should file
 an issue if they are willing to help.
 
 =head2 Data Sources
-
-=head2 Environment Variables
 
 =head2 User Program
 
