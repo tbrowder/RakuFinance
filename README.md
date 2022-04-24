@@ -106,18 +106,21 @@ Planned Features
 User's Configuration File
 -------------------------
 
-The **finance** program requires the user to define his or her commodities by listing their symbols in a confguration file named **config.ini** located in the working directory. The file uses a custom INI-style format with comments begining with a '#' character, two keywords ('hold' and 'reinvest') that are followed by a space-separated list of symbols. Following is a simple example:
+The **finance** program requires the user to define his or her commodities by listing their symbols in a confguration file named **config.ini** located in the working directory. The file uses a simple text file with comments begining with a '#' and a list of symbols, one per line. Following is a simple example:
 
     # A list of stocks or mutual funds which 
-    # ARE NOT reinvested with dividends and capital gains: 
-    hold:
-        T
-        mrk # commodity symbols are not case-sensitive
-
-    # A list of stocks or mutual funds which 
-    # ARE reinvested with dividends and capital gains: 
-    reinvest:
-    ARTIX TAREX JSVAX SLASX
+    # are reinvested with dividends and capital gains
+    # until a stop date, if any, is entered following
+    # its symbol in format YYYY-MM-DD.
+    #
+    # Symbol    Stop date for reinvestments
+    #                   (if any)
+    # ======    ===========================
+      ARTIX 
+      JSVAX 
+      SLASX
+      TAREX 
+      MRK       2000-01-01
 
 You may use **finance** to write an empty configuration file by using the 'config' mode which either checks an existing configuration file or creates an empty one with the required types of lists.
 
