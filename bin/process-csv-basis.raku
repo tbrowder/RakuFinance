@@ -4,7 +4,7 @@ use Data::Dump::Tree;
 
 use lib <../lib ./lib>;
 use RakuFinance;
-use YahooMutualFunds;
+use YahooFinance;
 
 my %syms = set <ARTIX TAREX JSVAX SLASX>;
 if not @*ARGS {
@@ -294,9 +294,9 @@ for @syms -> $Symbol {
         ++$i;
         my $tr = %trans{$Symbol}{$Date};
         # we have to fill in the empty values from the pieces
-        my $tr.prevtotsh   = $prev-tr.totsh;
-        my $tr.prevtotcost = $prev-tr.totcost;
-        my $tr.prevclose   = $prev-tr.close;
+        $tr.prevtotsh   = $prev-tr.totsh;
+        $tr.prevtotcost = $prev-tr.totcost;
+        $tr.prevclose   = $prev-tr.close;
 
         my $totshares = $tr.totsh;
         my $totcost   = $tr.totcost;
