@@ -4,7 +4,14 @@ use Text::Utils :strip-comment;
 
 sub read-config($cfil, :$debug --> Hash) is export {
     my %h;
-    my @lines = $cfil.IO.lines;
+    my @lines;
+    if $cfil.IO.r {
+        @lines = $cfil.IO.lines;
+    }
+    elsif $cfil ~~ Str {
+        @lines = $cfil.lines;
+    }
+
     my $err = 0;
     LINE: for @lines -> $line is copy {
         $line = strip-comment $line;
@@ -50,9 +57,11 @@ sub read-config($cfil, :$debug --> Hash) is export {
     }
 
     if $err {
-        say "FATAL: Bad portfolio data file: '$cfil':";
-        say "       Invalid format on one or more date lines.";
-        exit;
+        die qq:to/HERE/;
+        FATAL: Bad portfolio data file: '$cfil':
+               Invalid format on one or more date lines.
+        HERE
+        #fail;
     }
 
     if $debug {
