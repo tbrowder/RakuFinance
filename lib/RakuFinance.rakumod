@@ -5,6 +5,7 @@ use Text::Utils :strip-comment;
 sub read-config($cfil, :$debug --> Hash) is export {
     my %h;
     my @lines = $cfil.IO.lines;
+    my $err = 0;
     LINE: for @lines -> $line is copy {
         $line = strip-comment $line;
         next if $line !~~ /\S/;
@@ -19,7 +20,39 @@ sub read-config($cfil, :$debug --> Hash) is export {
         my @w = $line.uc.words;
         my $sym = @w.shift;
         my $dat = @w.elems ?? @w.shift !! 0; 
+        if $dat ~~ /^ (\d**4) '-' (\d\d) '-' (\d\d) $/ {
+            my $y = ~$0;
+            my $m = ~$1;
+            my $d = ~$2;
+            # check for valid numbers
+            my Date $D;
+            try {
+                $D = Date.new("$y-$m-$d");
+            }
+            if $! {
+                my $msg = $!.Str;
+                say "ERROR: line '$line': $msg";
+                ++$err;
+            }
+            else {
+                # date should NOT be in the future
+                if $D > DateTime.now.Date {
+                    say "ERROR: line '$line': A future date is illegal.";
+                }
+        
+            }
+        }
+        else {
+            say "ERROR: line '$line' has the wrong date format (should be YYYY-MM-DD)";
+            ++$err;
+        }
         %h{$sym} = $dat;
+    }
+
+    if $err {
+        say "FATAL: Bad portfolio data file: '$cfil':";
+        say "       Invalid format on one or more date lines.";
+        exit;
     }
 
     if $debug {
@@ -45,14 +78,16 @@ sub dump-config(%h) is export {
 
 sub check-config($cfil, :$debug) is export {
     if $cfil.IO.r {
-        say "Checking existing file '$cfil'...";
+        say "Checking existing file '$cfil'..." if $debug;
         my %config = read-config $cfil, :$debug;
-        say "Dumping $cfil:";
-        dump-config %config;
-        say "Exiting."; exit;
+        if $debug {
+            say "Dumping $cfil:";
+            dump-config %config;
+            say "DEBUG Exiting."; exit;
+        }
     }
     else {
-        say "Creating empty configuration file '$cfil'...";
+        say "Creating empty portfolio file '$cfil'..." if $debug;
         my $fh = open $cfil, :w;
 
         $fh.print: qq:to/HERE/;
@@ -65,6 +100,8 @@ sub check-config($cfil, :$debug) is export {
         # dividends reinvested.
         HERE
         $fh.close;
-        say "Exiting."; exit;
+        if $debug {
+            say "DEBUG: Exiting."; exit;
+        }
     }
 } # sub check-config

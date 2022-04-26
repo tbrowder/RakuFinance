@@ -6,38 +6,49 @@ use lib <../lib ./lib>;
 use RakuFinance;
 use YahooFinance;
 
-my %syms = set <ARTIX TAREX JSVAX SLASX>;
+constant $pfil = 'Portfolio.dat';
+my %syms; 
+if $pfil.IO.r {
+    check-config $pfil;
+    %syms = read-config $pfil;
+}
+else {
+    check-config $pfil;
+}
+
 if not @*ARGS {
     say qq:to/HERE/;
     Usage: {$*PROGRAM.basename} all | <symbol> [options...][debug]
-    Processes Yahoo Finance historical data files (daily, splits,
-        dividends, and captital gains) for:
-    HERE
-    say "  $_" for %syms.keys.sort;
-    say qq:to/HERE/;
 
-    and can produce output showing the stocks' bases.
+    Processes Yahoo Finance historical data files (daily, splits,
+    dividends, and captital gains) for the securities found in
+    the user's portfolio file '$pfil'  and can produce output 
+    showing their bases, gains and losses, and current values. (A 
+    '$pfil', with instructions, will be created if none exists.)
 
     Options
-      go    - produces a single file showing the basis for the
-              input symbol (or all known symbols) [the default]
-      check - produces a duplicate of the input files
+      go     - produce a single file showing the basis for the
+               input symbol (or all known symbols) [the default]
+      check  - produce a duplicate of the input files [a debug feature]
+      list   - show the securities in file '$pfil'
 
     HERE
     exit;
 }
 
-my $tgt = "all";
 my @tgt-syms;
-my $check = 0;
-my $debug = 0;
+my $tgt    = "all";
+my $check  = 0;
+my $debug  = 0;
+my $list   = 0;
 for @*ARGS {
-    when /:i ^ d/ { $debug = 1 }
-    when /:i ^ c/ {
+    when /^ d/ { $debug = 1 }
+    when /^ c/ {
         $check = 1;
         @tgt-syms.push($_) for %syms.keys;
         $tgt = 'all';
     }
+    when /^ l/ { $list = 1 }
     default {
         # expecting either 'all' or a known symbol
         my $opt = $_.uc;
