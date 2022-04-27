@@ -33,7 +33,7 @@ Transactions recognized by this module currently are:
 <th>Type</th> <th>Code</th>
 </tr></thead>
 <tbody>
-<tr> <td>Buy</td> <td>b</td> </tr> <tr> <td>Sale</td> <td>sa</td> </tr> <tr> <td>Split</td> <td>sp</td> </tr> <tr> <td>Merger</td> <td>m</td> </tr> <tr> <td>Dividend</td> <td>d</td> </tr> <tr> <td>Capital gain</td> <td>c</td> </tr>
+<tr> <td>Buy</td> <td>b</td> </tr> <tr> <td>Sell</td> <td>se</td> </tr> <tr> <td>Split</td> <td>sp</td> </tr> <tr> <td>Merger</td> <td>m</td> </tr> <tr> <td>Dividend</td> <td>d</td> </tr> <tr> <td>Capital gain</td> <td>c</td> </tr>
 </tbody>
 </table>
 
