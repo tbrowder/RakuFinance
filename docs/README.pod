@@ -35,7 +35,7 @@ Transactions recognized by this module currently are:
 Type         | Code 
 ---          + --- 
 Buy          | b 
-Sale         | sa 
+Sell         | se 
 Split        | sp 
 Merger       | m  
 Dividend     | d  

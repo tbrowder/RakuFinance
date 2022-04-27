@@ -69,9 +69,26 @@ for @*ARGS {
     }
 }
 
-# check for mandatory env var
-if %*ENV<RakFinUserDataDir>:exists {
-    # make sure its parent is NOT the current working directory
+# check for mandatory env vars and directories
+constant $E1 = 'RakFinPrivDataDir';
+constant $E2 = 'RakFinPubDataDir';
+constant $D1 = 'public-data';
+if %*ENV{$E1}:exists {
+    # private data
+    # TODO make sure its parent is NOT the current working directory
+}
+else {
+    say "WARNING: Cannot find required environment variable '$E1'.";
+}
+
+if %*ENV{$E2}:exists {
+    # public data
+}
+elsif $D1.IO.d {
+    # public data
+}
+else {
+    say "WARNING: Cannot find environment variable '$E2' or local directory '$D1'.";
 }
 
 # These hashes are collections of hashes
