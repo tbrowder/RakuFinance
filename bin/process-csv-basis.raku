@@ -69,6 +69,11 @@ for @*ARGS {
     }
 }
 
+# check for mandatory env var
+if %*ENV<RakFinUserDataDir>:exists {
+    # make sure its parent is NOT the current working directory
+}
+
 # These hashes are collections of hashes
 # holding data from Yahoo Finance
 # as well as the user's buy/sell inputs
