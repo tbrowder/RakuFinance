@@ -6,7 +6,6 @@
   "build-depends": [
   ],
   "depends": [
-    "TOML:Thumb",
     "Text::Utils"
   ],
   "description": "Provides routines to calculate the basis of a portfolio of investments",
