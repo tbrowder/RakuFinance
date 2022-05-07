@@ -71,13 +71,13 @@ sub read-config($cfil, :$debug --> Hash) is export {
 
     if $debug {
         note "DEBUG: dumping config file '$cfil':";
-        dump-config  %h;
+        show-config  %h;
     }
 
     %h
 } # sub read-config
 
-sub dump-config(%h) is export {
+sub show-config(%h) is export {
     for %h.keys.sort -> $k {
         print sprintf("  %-7.7s", $k);
         my $date = %h{$k};
@@ -88,7 +88,7 @@ sub dump-config(%h) is export {
             say " (all dividends and cap gains are reinvested)";
         }
     }
-} # sub dump-config
+} # sub show-config
 
 sub check-config($cfil, :$debug) is export {
     if $cfil.IO.r {
@@ -96,12 +96,12 @@ sub check-config($cfil, :$debug) is export {
         my %config = read-config $cfil, :$debug;
         if $debug {
             say "Dumping $cfil:";
-            dump-config %config;
+            show-config %config;
             say "DEBUG Exiting."; exit;
         }
     }
     else {
-        say "Creating empty portfolio file '$cfil'..." if $debug;
+        say "Creating empty portfolio file '$cfil'..."; # if $debug;
         my $fh = open $cfil, :w;
 
         $fh.print: qq:to/HERE/;

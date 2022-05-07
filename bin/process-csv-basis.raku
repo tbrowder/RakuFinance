@@ -96,8 +96,13 @@ else {
 }
 
 if $list {
-   say "List of your securities in file 'Portfolio.dat':";
-   dump-config %syms;
+   if %syms.elems {
+      say "List of your securities in file '$pfil':";
+      show-config %syms;
+   }
+   else {
+      say "Your '$pfil' file has no securities listed.";
+   }
    exit;
 }
 
