@@ -16,41 +16,44 @@ use RakuFinance;
 
 =head1 DESCRIPTION
 
-B<RakuFinance> is a module one can use to calculate various data for a portfolio of investments
-including basis, gain/loss, current value, and time-series statistics.
+B<RakuFinance> is a module one can use to calculate various data for a
+portfolio of investments including basis, gain/loss, current value,
+and time-series statistics.
 
-The user has to provide the accepted symbols for his or her securities as well as their buy/sell
-data in a comma-separated-value (CSV) file with the appropriate header line (see B<Input Files>)
-along with pertinent historical data available from public data sources (see B<Data Sources>).
+The user has to provide the accepted symbols for his or her securities
+as well as their buy/sell data in a simple file format in a file named
+B<Portfolio.dat> (see B<Input Files>) along with pertinent historical
+data available from public data sources (see B<Data Sources>).
 
-Note the module is currently designed for the US but should be able to be modified to handle
-currency and securities for any country with the help of an interested collaborator. Contact
-the author if you are volunteering.
+Note the module is currently designed for the US but should be able to
+be modified to handle currency and securities for any country with the
+help of an interested collaborator. Contact the author if you are
+volunteering.
 
 =head2 Transactions
 
 Transactions recognized by this module currently are:
 
 =begin table
-Type         | Code 
----          + --- 
-Buy          | b 
-Sell         | se 
-Split        | sp 
-Merger       | m  
-Dividend     | d  
-Capital gain | c  
+Type         | Code
+---          + ---
+Buy          | b
+Sell         | se
+Split        | sp
+Merger       | m
+Dividend     | d
+Capital gain | c
 =end table
 
 Note transaction codes may be entered in lower- or upper-case.
 
 In addition to the transaction type, each transaction for a security
-on the same date has a temporal number to distinguish its order
-of execution regardless of type.
+on the same date has a temporal number to distinguish its order of
+execution regardless of type.
 
-The following table shows a hypothetical, abbreviated set of transactions
-for security XXX (number of shares, prices, and other transaction data
-are not shown).
+The following table shows a hypothetical, abbreviated set of
+transactions for security XXX (number of shares, prices, and other
+transaction data are not shown).
 
 =begin table
 Security | Date       | Transaction | Transaction
@@ -65,27 +68,30 @@ XXX      | 2022-01-01 | b           | 5
 
 =head2 Environment Variables
 
-The working directory chosen by the user should be a dedicated directory
-with several subdirectories to hold public data of various types. 
+The working directory chosen by the user should be a dedicated
+directory with several subdirectories to hold public data of various
+types.
 
 =head3 B<RakFinPrivDataDir>
 
 The user's personal data of buys, holdings, and sales should be
-segregated into another directory B<outside of the working 
-directory>. The absolute path of that directory must 
-be defined in the environment variable B<RakFinPrivDataDir>.
-If it is not defined or found to be invalid, the program will so advise and abort.
+segregated into another directory B<outside of the working
+directory>. The absolute path of that directory must be defined in the
+environment variable B<RakFinPrivDataDir>.  If it is not defined or
+found to be invalid, the program will so advise and abort.
 
 =head3 B<RakFinPubDataDir>
 
-Publicly available data is expected to be in local directory 'public-data'
-or in the directory defined by environment variable B<RakFinPubDataDir>. 
-If it is not defined or found to be invalid, the program will so advise and abort.
+Publicly available data is expected to be in local directory
+'public-data' or in the directory defined by environment variable
+B<RakFinPubDataDir>.  If it is not defined or found to be invalid, the
+program will so advise and abort.
 
 
 =head2 Input Files
 
-Currently, input files can be read from the following financial financial firms:
+Currently, input transactionfiles can be read from the following
+financial financial firms:
 
 =item TD Ameritrade (L<https://tdameritrade.com>)
 =item Fidelity (L<https://fidelity.com>)
@@ -101,7 +107,7 @@ An executable Raku program, B<finance>, is installed as part of this module. It 
 modes for calculating the following statistics for a portfolio:
 
 =item 1 - create a CSV file showing all transactions by date, symbol, transaction order (for a single security or all);
-=item 3 - create a CSV file showing basis for 
+=item 3 - create a CSV file showing basis for
 =item 4 - create a CSV file showing current value, gain/loss, basis, and return on investment (for a single security or all)
 
 =head2 Planned Features
@@ -114,25 +120,24 @@ modes for calculating the following statistics for a portfolio:
 
 =head2 User's Configuration File
 
-The B<finance> program requires the user to define his or her commodities
-by listing their symbols  
-in a confguration file named B<config.ini> located in the working directory.
-The file uses a simple text file with comments begining with a '#'
-and a list of symbols, one per line.  Following is a simple example:
+The B<finance> program requires the user to define his or her
+commodities by listing their symbols in a confguration file named
+B<Portfolio.dat> located in the working directory.  The file uses a
+simple text file with comments begining with a '#' and a list of
+symbols, one per line.  Following is a simple example:
 
 =begin code
-# A list of stocks or mutual funds which 
-# are reinvested with dividends and capital gains
-# until a stop date, if any, is entered following
-# its symbol in format YYYY-MM-DD.
-#
-# Symbol    Stop date for reinvestments
-#                   (if any)
-# ======    ===========================
-  ARTIX 
-  JSVAX 
+# Your list of securities of interest are entered here,
+# one per line.  All are assumed to have dividends and
+# capital gains reinvested since purchase unless there
+# is a stop date as the second word on the same line as
+# the symbol. The second word must be the date (in
+# format YYYY-MM-DD) when the security stopped having
+# dividends reinvested.
+  ARTIX
+  JSVAX
   SLASX
-  TAREX 
+  TAREX
   MRK       2000-01-01
 =end code
 
@@ -142,8 +147,8 @@ required types of lists.
 
 =head1 CREDITS
 
-The author is indebted to the developers of GnuCash (see L<https://gnucash.org>) for
-their account schema for commodities.
+The author is indebted to the developers of GnuCash (see
+L<https://gnucash.org>) for their account schema for commodities.
 
 =head1 AUTHOR
 
@@ -153,7 +158,7 @@ Tom Browder <tbrowder@acm.org>
 
 Copyright 2022 Tom Browder
 
-This library is free software; you may redistribute it or modify it under the Artistic License 2.0.
+This library is free software; you may redistribute it or modify it
+under the Artistic License 2.0.
 
 =end pod
-

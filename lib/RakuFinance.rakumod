@@ -109,7 +109,7 @@ sub check-config($cfil, :$debug) is export {
         # one per line.  All are assumed to have dividends and
         # capital gains reinvested since purchase unless there
         # is a stop date as the second word on the same line as
-        # the symbol. The second word should be the date (in
+        # the symbol. The second word must be the date (in
         # format YYYY-MM-DD) when the security stopped having
         # dividends reinvested.
         HERE
