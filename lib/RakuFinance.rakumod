@@ -17,41 +17,46 @@ sub read-config($cfil, :$debug --> Hash) is export {
         $line = strip-comment $line;
         next if $line !~~ /\S/;
 
-        # Symbols are letters or numbers and may have periods for suffixes.
-        # All are assumed to have dividends and capital gains reinvested
-        # since purchase unless there is a stop date as the second word
-        # on the same line as the symbol.
-        # The second should be the date (YYYY-MM-DD) when
-        # the security stopped having dividends reinvested.
+        # Symbols are letters or numbers and may have periods for
+        # suffixes.  All are assumed to have dividends and capital
+        # gains reinvested since purchase unless there is a stop date
+        # as the second word on the same line as the symbol.  The
+        # second should be the date (YYYY-MM-DD) when the security
+        # stopped having dividends reinvested.
 
         my @w = $line.uc.words;
         my $sym = @w.shift;
-        my $dat = @w.elems ?? @w.shift !! 0; 
-        if $dat ~~ /^ (\d**4) '-' (\d\d) '-' (\d\d) $/ {
-            my $y = ~$0;
-            my $m = ~$1;
-            my $d = ~$2;
-            # check for valid numbers
-            my Date $D;
-            try {
-                $D = Date.new("$y-$m-$d");
-            }
-            if $! {
-                my $msg = $!.Str;
-                say "ERROR: line '$line': $msg";
-                ++$err;
+        my $dat = @w.elems ?? @w.shift !! 0;
+        if $dat {
+            if $dat ~~ /^ (\d**4) '-' (\d\d) '-' (\d\d) $/ {
+                my $y = ~$0;
+                my $m = ~$1;
+                my $d = ~$2;
+                # check for valid numbers
+                my Date $D;
+                try {
+                    $D = Date.new("$y-$m-$d");
+                }
+                if $! {
+                    my $msg = $!.Str;
+                    say "ERROR: line '$line': $msg";
+                    ++$err;
+                }
+                else {
+                    # date should NOT be in the future
+                    if $D > DateTime.now.Date {
+                        say "ERROR: line '$line': A future date is illegal.";
+                        ++$err;
+                    }
+                    else {
+                        $dat = $D;
+                    }
+                }
             }
             else {
-                # date should NOT be in the future
-                if $D > DateTime.now.Date {
-                    say "ERROR: line '$line': A future date is illegal.";
-                }
-        
+                say "ERROR: line '$line' has the wrong date format (should be YYYY-MM-DD)";
+                ++$err;
             }
-        }
-        else {
-            say "ERROR: line '$line' has the wrong date format (should be YYYY-MM-DD)";
-            ++$err;
         }
         %h{$sym} = $dat;
     }
@@ -74,7 +79,7 @@ sub read-config($cfil, :$debug --> Hash) is export {
 
 sub dump-config(%h) is export {
     for %h.keys.sort -> $k {
-        print "  $k";
+        print sprintf("  %-7.7s", $k);
         my $date = %h{$k};
         if $date {
             say " (reinvestment stop date: $date)";
@@ -101,11 +106,11 @@ sub check-config($cfil, :$debug) is export {
 
         $fh.print: qq:to/HERE/;
         # Your list of securities of interest are entered here,
-        # one per line.  All are assumed to have dividends and 
-        # capital gains reinvested since purchase unless there 
-        # is a stop date as the second word on the same line as 
+        # one per line.  All are assumed to have dividends and
+        # capital gains reinvested since purchase unless there
+        # is a stop date as the second word on the same line as
         # the symbol. The second word should be the date (in
-        # format YYYY-MM-DD) when the security stopped having 
+        # format YYYY-MM-DD) when the security stopped having
         # dividends reinvested.
         HERE
         $fh.close;

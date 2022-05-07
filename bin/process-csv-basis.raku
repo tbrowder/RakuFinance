@@ -7,7 +7,7 @@ use RakuFinance;
 use YahooFinance;
 
 constant $pfil = 'Portfolio.dat';
-my %syms; 
+my %syms;
 if $pfil.IO.r {
     check-config $pfil;
     %syms = read-config $pfil;
@@ -22,8 +22,8 @@ if not @*ARGS {
 
     Processes Yahoo Finance historical data files (daily, splits,
     dividends, and captital gains) for the securities found in
-    the user's portfolio file '$pfil'  and can produce output 
-    showing their bases, gains and losses, and current values. (A 
+    the user's portfolio file '$pfil'  and can produce output
+    showing their bases, gains and losses, and current values. (A
     '$pfil', with instructions, will be created if none exists.)
 
     Options
@@ -73,6 +73,7 @@ for @*ARGS {
 constant $E1 = 'RakFinPrivDataDir';
 constant $E2 = 'RakFinPubDataDir';
 constant $D1 = 'public-data';
+constant $D2 = '../public-data';
 if %*ENV{$E1}:exists {
     # private data
     # TODO make sure its parent is NOT the current working directory
@@ -87,8 +88,17 @@ if %*ENV{$E2}:exists {
 elsif $D1.IO.d {
     # public data
 }
+elsif $D2.IO.d {
+    # public data
+}
 else {
-    say "WARNING: Cannot find environment variable '$E2' or local directory '$D1'.";
+    say "WARNING: Cannot find environment variable '$E2' or local directory '$D1' (or '$D2').";
+}
+
+if $list {
+   say "List of your securities in file 'Portfolio.dat':";
+   dump-config %syms;
+   exit;
 }
 
 # These hashes are collections of hashes
