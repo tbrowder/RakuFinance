@@ -90,7 +90,7 @@ sub show-config(%h) is export {
     }
 } # sub show-config
 
-sub check-config($cfil, :$debug) is export {
+sub check-config($cfil, :$no-say, :$debug) is export {
     if $cfil.IO.r {
         say "Checking existing file '$cfil'..." if $debug;
         my %config = read-config $cfil, :$debug;
@@ -101,7 +101,9 @@ sub check-config($cfil, :$debug) is export {
         }
     }
     else {
-        say "Creating empty portfolio file '$cfil'..."; # if $debug;
+        unless $no-say {
+            say "Creating empty portfolio file '$cfil'..."; # if $debug;
+        }
         my $fh = open $cfil, :w;
 
         $fh.print: qq:to/HERE/;

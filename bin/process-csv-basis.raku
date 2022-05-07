@@ -8,12 +8,13 @@ use YahooFinance;
 
 constant $pfil = 'Portfolio.dat';
 my %syms;
+
 if $pfil.IO.r {
     check-config $pfil;
     %syms = read-config $pfil;
 }
 else {
-    check-config $pfil;
+    check-config $pfil, :no-say;
 }
 
 if not @*ARGS {
@@ -33,6 +34,7 @@ if not @*ARGS {
       list   - show the securities in file '$pfil'
 
     HERE
+
     exit;
 }
 

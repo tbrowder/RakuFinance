@@ -106,7 +106,7 @@ an issue if they are willing to help.
 An executable Raku program, B<finance>, is installed as part of this module. It provides
 modes for calculating the following statistics for a portfolio:
 
-=item 1 - create a CSV file showing all transactions by date, symbol, transaction order (for a single security or all);
+=item 1 - create a CSV file showing all transactions by date, symbol, transaction order (for a single security or all)
 =item 3 - create a CSV file showing basis for
 =item 4 - create a CSV file showing current value, gain/loss, basis, and return on investment (for a single security or all)
 
@@ -132,8 +132,8 @@ symbols, one per line.  Following is a simple example:
 # capital gains reinvested since purchase unless there
 # is a stop date as the second word on the same line as
 # the symbol. The second word must be the date (in
-# format YYYY-MM-DD) when the security stopped having
-# dividends reinvested.
+# format YYYY-MM-DD) when the security B<stopped having
+# dividends reinvested>.
   ARTIX
   JSVAX
   SLASX
@@ -141,9 +141,8 @@ symbols, one per line.  Following is a simple example:
   MRK       2000-01-01
 =end code
 
-You may use B<finance> to write an empty configuration file by using the 'config' mode
-which either checks an existing configuration file or creates an empty one with the
-required types of lists.
+Note B<finance> will create an empty configuration file, with
+instructions, the first time you execute it (if none already exists).
 
 =head1 CREDITS
 
