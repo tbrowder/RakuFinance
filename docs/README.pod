@@ -87,17 +87,24 @@ Publicly available data is expected to be in local directory
 B<RakFinPubDataDir>.  If it is not defined or found to be invalid, the
 program will so advise and abort.
 
+=head2 External Input Files
 
-=head2 Input Files
-
-Currently, input transactionfiles can be read from the following
-financial financial firms:
+Currently, input transaction and other data files can be read from the following
+sources:
 
 =item TD Ameritrade (L<https://tdameritrade.com>)
 =item Fidelity (L<https://fidelity.com>)
+=item Yahoo Finance (L<https://yahoo.com>)
 
 Other data formats may be added in the future. Interested users should file
 an issue if they are willing to help.
+
+=head2 Internal Input Files
+
+User data for security holdings as well as securities of interest
+are kept in two different files: (1) B<Portfolio.dat> and B<Holdings.csv>.
+The CSV file is best managed by reading with LibreOffice or similar
+program, modifying as desired, and saving again in CSV format.
 
 =head2 Data Sources
 
