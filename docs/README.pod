@@ -20,10 +20,25 @@ B<RakuFinance> is a module one can use to calculate various data for a
 portfolio of investments including basis, gain/loss, current value,
 and time-series statistics.
 
+There are two main uses of the module:
+
+=begin item 
+Manipulate historical data
+
+The user enters the symbol of one or more symbols in file B<Securities.dat>
+in the format described inside the default, empty file.
+Note the user may or may not actually own any of them.
+=end item
+
+=begin item 
+Analyze current or past holdings
+
 The user has to provide the accepted symbols for his or her securities
 as well as their buy/sell data in a simple file format in a file named
-B<Portfolio.dat> (see B<Input Files>) along with pertinent historical
+B<Holdings.csv> (see B<Input Files>) along with pertinent historical
 data available from public data sources (see B<Data Sources>).
+
+=end item
 
 Note the module is currently designed for the US but should be able to
 be modified to handle currency and securities for any country with the
